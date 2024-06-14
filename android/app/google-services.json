@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "991034804524",
+    "project_id": "bloc-clean-architecture-911ca",
+    "storage_bucket": "bloc-clean-architecture-911ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991034804524:android:0476d2dd250df3d9ed0489",
+        "android_client_info": {
+          "package_name": "com.cleanarchitecturebloc.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzwsA1fiGGBf6J0erk2fu-9ZT0jb127T8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
