@@ -1,0 +1,9 @@
+{
+ "home": "Home",
+ "settings": "Settings",
+ "profile": "Profile",
+ "language": "Language",
+ "theme": "Theme",
+ "light": "Light",
+ "dark": "Dark"
+}
