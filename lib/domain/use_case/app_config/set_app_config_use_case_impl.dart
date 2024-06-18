@@ -1,4 +1,4 @@
-import '../../model/app_config.dart';
+import '../../entity/app_config.dart';
 import '../../repository/app_config_repository.dart';
 import 'set_app_config_use_case.dart';
 

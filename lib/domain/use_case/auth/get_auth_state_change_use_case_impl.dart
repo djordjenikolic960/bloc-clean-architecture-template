@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../repository/auth_repository.dart';
-import 'get_user_stream_use_case.dart';
+import 'get_auth_state_change_use_case.dart';
 
-class GetUserStreamUseCaseImpl implements GetUserStreamUseCase {
+class GetAuthStateChangeUseCaseImpl implements GetAuthStateChangeUseCase {
   final AuthRepository _authRepository;
 
-  GetUserStreamUseCaseImpl(this._authRepository);
+  GetAuthStateChangeUseCaseImpl(this._authRepository);
 
   @override
   Stream<User?> get() {

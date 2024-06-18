@@ -1,3 +1,4 @@
+import 'shared/auth/bloc/auth_event.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'presentation/theme/themes.dart';
 import 'shared/app_config/bloc/app_config_bloc.dart';
 import 'shared/app_config/bloc/app_config_event.dart';
 import 'shared/app_config/bloc/app_config_state.dart';
+import 'shared/auth/bloc/auth_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,24 +43,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppConfigBloc>(
-      create: (_) => presentation_service_locator.get<AppConfigBloc>()
-        ..add(InitializeAppConfig()),
-      child: BlocBuilder<AppConfigBloc, AppConfigState>(
-        builder: (context, state) {
-          return MaterialApp.router(
-            title: 'Flutter Demo',
-            theme: state.appConfig.theme == CustomTheme.light
-                ? lightTheme
-                : darkTheme,
-            routerConfig: presentation_service_locator
-                .get<app_router.Router>()
-                .getRouter(),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: state.appConfig.locale,
-          );
-        },
+    return BlocProvider<AuthBloc>(
+      create: (_) => presentation_service_locator.get<AuthBloc>()
+        ..add(InitializeAuthStateChangeStream()),
+      child: BlocProvider<AppConfigBloc>(
+        create: (_) => presentation_service_locator.get<AppConfigBloc>()
+          ..add(InitializeAppConfig()),
+        child: BlocBuilder<AppConfigBloc, AppConfigState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              title: 'Flutter Demo',
+              theme: state.appConfig.theme == CustomTheme.light
+                  ? lightTheme
+                  : darkTheme,
+              routerConfig: presentation_service_locator
+                  .get<app_router.Router>()
+                  .getRouter(),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: state.appConfig.locale,
+            );
+          },
+        ),
       ),
     );
   }

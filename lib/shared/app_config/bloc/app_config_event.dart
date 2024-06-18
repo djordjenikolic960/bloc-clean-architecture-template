@@ -1,4 +1,4 @@
-import '../../../domain/model/app_config.dart';
+import '../../../domain/entity/app_config.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

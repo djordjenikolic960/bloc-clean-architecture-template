@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../domain/model/app_config.dart';
+import '../../domain/entity/app_config.dart';
 import '../../domain/repository/app_config_repository.dart';
 import '../../l10n/l10n.dart';
 import '../../presentation/theme/themes.dart';

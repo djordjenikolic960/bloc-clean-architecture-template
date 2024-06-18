@@ -18,7 +18,6 @@ class AppColors {
   static const radioButtonUnselectedColorLight = Color(0xFF616161);
   static const radioButtonSelectedColorLight = Color(0xFF6200EE);
 
-
   // dark theme
   static const scaffoldBackgroundColorDark = Color(0xFF121212);
   static const dividerColorDark = Color(0xFF343434);

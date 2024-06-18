@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../domain/model/app_config.dart';
+import '../../../domain/entity/app_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/use_case/app_config/get_app_config_stream_use_case.dart';
 import '../../../domain/use_case/app_config/set_app_config_use_case.dart';

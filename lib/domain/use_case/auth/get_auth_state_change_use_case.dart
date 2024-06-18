@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract interface class GetUserStreamUseCase {
+abstract interface class GetAuthStateChangeUseCase {
   Stream<User?> get();
 }

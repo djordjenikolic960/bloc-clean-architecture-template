@@ -1,3 +1,4 @@
+import '../widgets/list_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,7 +7,6 @@ import '../../shared/app_config/bloc/app_config_bloc.dart';
 import '../../shared/app_config/bloc/app_config_event.dart';
 import '../../shared/extension/build_context_extension.dart';
 import '../theme/themes.dart';
-import 'settings_item.dart';
 import 'package:flutter/material.dart';
 
 import '../../l10n/localization_extension.dart';
@@ -25,22 +25,20 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          SettingsItem(
+          ListItem(
             title: context.l10n.language,
             icon: Icons.language,
             onClick: () {
               _changeLanguageDialog(context);
             },
           ),
-          const Divider(),
-          SettingsItem(
+          ListItem(
             title: context.l10n.theme,
             icon: Icons.nightlight_outlined,
             onClick: () {
               _changeThemeDialog(context);
             },
           ),
-          const Divider(),
         ],
       ),
     );

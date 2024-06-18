@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/colors.dart';
+import '../../shared/dimens.dart';
 
 final lightTheme = ThemeData(
+  primaryColor: AppColors.scaffoldBackgroundColorLight,
   scaffoldBackgroundColor: AppColors.scaffoldBackgroundColorLight,
   dividerColor: AppColors.dividerColorLight,
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -11,6 +13,10 @@ final lightTheme = ThemeData(
     unselectedItemColor: AppColors.bottomNavBarUnSelectedItemColorLight,
   ),
   textTheme: const TextTheme(
+    titleLarge: TextStyle(
+      color: AppColors.textColorLight,
+      fontSize: Dimens.fontSize32,
+    ),
     bodyMedium: TextStyle(
       color: AppColors.textColorLight,
     ),
@@ -21,14 +27,14 @@ final lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
       color: AppColors.appBarTitleColorLight,
-      fontSize: 22,
+      fontSize: Dimens.fontSize22,
     ),
     color: AppColors.appBarColorLight,
   ),
   dialogTheme: const DialogTheme(
     backgroundColor: AppColors.dialogBackgroundColorLight,
     titleTextStyle: TextStyle(
-      fontSize: 22,
+      fontSize: Dimens.fontSize22,
       color: AppColors.dialogTitleColorLight,
     ),
     contentTextStyle: TextStyle(
@@ -47,6 +53,7 @@ final lightTheme = ThemeData(
 );
 
 final darkTheme = ThemeData(
+  primaryColor: AppColors.scaffoldBackgroundColorDark,
   scaffoldBackgroundColor: AppColors.scaffoldBackgroundColorDark,
   dividerColor: AppColors.dialogBackgroundColorDark,
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -57,11 +64,15 @@ final darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
       color: AppColors.appBarTitleColorLight,
-      fontSize: 22,
+      fontSize: Dimens.fontSize22,
     ),
     color: AppColors.appBarColorDark,
   ),
   textTheme: const TextTheme(
+    titleLarge: TextStyle(
+      color: AppColors.textColorDark,
+      fontSize: Dimens.fontSize32,
+    ),
     bodyMedium: TextStyle(
       color: AppColors.textColorDark,
     ),
@@ -70,7 +81,7 @@ final darkTheme = ThemeData(
   dialogTheme: const DialogTheme(
     backgroundColor: AppColors.dialogBackgroundColorDark,
     titleTextStyle: TextStyle(
-      fontSize: 22,
+      fontSize: Dimens.fontSize22,
       color: AppColors.dialogTitleColorDark,
     ),
     contentTextStyle: TextStyle(

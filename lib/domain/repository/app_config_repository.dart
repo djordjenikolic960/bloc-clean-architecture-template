@@ -1,4 +1,4 @@
-import '../model/app_config.dart';
+import '../entity/app_config.dart';
 
 abstract class AppConfigRepository {
   Stream<AppConfig> getAppConfigStream();

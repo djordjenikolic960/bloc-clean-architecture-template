@@ -4,14 +4,20 @@ import '../use_case/app_config/get_app_config_stream_use_case.dart';
 import '../use_case/app_config/get_app_config_stream_use_case_impl.dart';
 import '../use_case/app_config/set_app_config_use_case.dart';
 import '../use_case/app_config/set_app_config_use_case_impl.dart';
-import '../use_case/auth/get_user_stream_use_case.dart';
-import '../use_case/auth/get_user_stream_use_case_impl.dart';
+import '../use_case/auth/get_auth_state_change_use_case.dart';
+import '../use_case/auth/get_auth_state_change_use_case_impl.dart';
+import '../use_case/auth/send_password_reset_email_use_case.dart';
+import '../use_case/auth/send_password_reset_email_use_case_impl.dart';
 import '../use_case/auth/sign_in_with_email_and_password_use_case.dart';
 import '../use_case/auth/sign_in_with_email_and_password_use_case_impl.dart';
 import '../use_case/auth/sign_out_use_case.dart';
 import '../use_case/auth/sign_out_use_case_impl.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case_impl.dart';
+import '../use_case/user/get_user_as_stream_use_case.dart';
+import '../use_case/user/get_user_as_stream_use_case_impl.dart';
+import '../use_case/user/save_user_use_case.dart';
+import '../use_case/user/save_user_use_case_impl.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -45,6 +51,7 @@ void _registerUseCases() {
   serviceLocator.registerFactory<SignUpWithEmailAndPasswordUseCase>(
     () => SignUpWithEmailAndPasswordUseCaseImpl(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -54,8 +61,26 @@ void _registerUseCases() {
     ),
   );
 
-  serviceLocator.registerFactory<GetUserStreamUseCase>(
-    () => GetUserStreamUseCaseImpl(
+  serviceLocator.registerFactory<GetAuthStateChangeUseCase>(
+    () => GetAuthStateChangeUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<SaveUserUseCase>(
+    () => SaveUserUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<GetUserAsStreamUseCase>(
+    () => GetUserAsStreamUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<SendPasswordResetEmailUseCase>(
+    () => SendPasswordResetEmailUseCaseImpl(
       serviceLocator(),
     ),
   );

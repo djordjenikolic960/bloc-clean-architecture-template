@@ -1,3 +1,12 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../di/service_locator.dart';
+import '../forgot_password/bloc/forgot_password_bloc.dart';
+import '../forgot_password/forgot_password_screen.dart';
+import '../login/bloc/login_bloc.dart';
+import '../login/login_screen.dart';
+import '../signup/bloc/signup_bloc.dart';
+import '../signup/signup_screen.dart';
 import 'router.dart' as app_router;
 import 'routes.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +28,9 @@ class RouterImpl implements app_router.Router {
     _router = GoRouter(routes: [
       _splashRoute(),
       _onBoardingRoute(),
+      _signUpRoute(),
+      _loginRoute(),
+      _forgotPasswordRoute(),
       _bottomNavigationRoute(),
     ]);
   }
@@ -33,6 +45,33 @@ class RouterImpl implements app_router.Router {
         name: Routes.onboarding.routerName,
         path: Routes.onboarding.path,
         builder: (_, __) => const OnboardingScreen(),
+      );
+
+  RouteBase _signUpRoute() => GoRoute(
+        name: Routes.signUp.routerName,
+        path: Routes.signUp.path,
+        builder: (_, __) => BlocProvider<SignupBloc>(
+          create: (_) => serviceLocator.get<SignupBloc>(),
+          child: const SignupScreen(),
+        ),
+      );
+
+  RouteBase _loginRoute() => GoRoute(
+        name: Routes.login.routerName,
+        path: Routes.login.path,
+        builder: (_, __) => BlocProvider<LoginBloc>(
+          create: (_) => serviceLocator.get<LoginBloc>(),
+          child: const LoginScreen(),
+        ),
+      );
+
+  RouteBase _forgotPasswordRoute() => GoRoute(
+        name: Routes.forgotPassword.routerName,
+        path: Routes.forgotPassword.path,
+        builder: (_, __) => BlocProvider<ForgotPasswordBloc>(
+          create: (_) => serviceLocator.get<ForgotPasswordBloc>(),
+          child: const ForgotPasswordScreen(),
+        ),
       );
 
   RouteBase _bottomNavigationRoute() => GoRoute(
