@@ -46,17 +46,15 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: Alignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(Dimens.size16),
+                  padding: const EdgeInsets.all(Dimens.size20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const Spacer(),
                       Text(
                         context.l10n.welcome_title,
                         style: context.textTheme.titleLarge,
                       ),
-                      const SizedBox(
-                        height: Dimens.size64,
-                      ),
+                      const Spacer(),
                       TextInputField(
                         controller: _emailController,
                         isError: !state.isEmailValid,
@@ -100,9 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: Dimens.size64,
-                      ),
+                      const Spacer(),
                       PrimaryButton(
                         onPressed: () {
                           context.read<LoginBloc>().add(

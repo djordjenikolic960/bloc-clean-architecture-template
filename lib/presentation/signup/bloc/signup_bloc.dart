@@ -17,6 +17,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   ) : super(SignupState.empty()) {
     on<SignupWithEmailAndPassword>(_emitSignupWithEmailAndPassword);
     on<UpdatePasswordVisibility>(_emitUpdatePasswordVisibility);
+    on<UpdateRepeatedPasswordVisibility>(_emitUpdateRepeatedPasswordVisibility);
   }
 
   FutureOr<void> _emitSignupWithEmailAndPassword(
@@ -26,16 +27,22 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     final isEmailValid = ValidationHelper.isEmailValid(event.email);
     final isPasswordValid = ValidationHelper.isPasswordValid(event.password);
     final isNameValid = event.name.isNotEmpty;
+    final isRepeatedPasswordValid = event.repeatedPassword == event.password;
 
-    if (!isEmailValid || !isPasswordValid || !isNameValid) {
+    if (!isEmailValid ||
+        !isPasswordValid ||
+        !isNameValid ||
+        !isRepeatedPasswordValid) {
       emit(
         state.copyWith(
           email: event.email,
           password: event.password,
           name: event.name,
+          repeatedPassword: event.repeatedPassword,
           isEmailValid: isEmailValid,
           isPasswordValid: isPasswordValid,
           isNameValid: isNameValid,
+          isRepeatedPasswordValid: isRepeatedPasswordValid,
           isFailure: false,
         ),
       );
@@ -68,6 +75,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           isEmailValid: true,
           isPasswordValid: true,
           isNameValid: true,
+          isRepeatedPasswordValid: true,
           isSubmitting: false,
           isFailure: true,
           failureMessage: e.errorCode.name,
@@ -79,6 +87,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           isEmailValid: true,
           isPasswordValid: true,
           isNameValid: true,
+          isRepeatedPasswordValid: true,
           isSubmitting: false,
           isFailure: true,
           failureMessage: Constant.emptyString,
@@ -92,5 +101,12 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     Emitter<SignupState> emit,
   ) {
     emit(state.copyWith(showPassword: !state.showPassword));
+  }
+
+  FutureOr<void> _emitUpdateRepeatedPasswordVisibility(
+    UpdateRepeatedPasswordVisibility event,
+    Emitter<SignupState> emit,
+  ) {
+    emit(state.copyWith(showRepeatedPassword: !state.showRepeatedPassword));
   }
 }

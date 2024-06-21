@@ -5,4 +5,6 @@ class Constant {
   static const emailPattern =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   static const passwordMinLength = 6;
+  static const fontFamilyRegular = "Regular";
+  static const fontFamilySemiBold = "SemiBold";
 }

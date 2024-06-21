@@ -13,14 +13,18 @@
   "forgot_password_subtitle": "Enter the email address associated with you account.",
   "email": "Email",
   "password": "Password",
+  "repeat_password": "Repeat password",
   "sign_up_message": "Don't have an account? Sign up",
   "login_message": "Already have an account? Log in",
   "invalid_email_message": "Invalid email format",
   "invalid_password_message": "Password should be at least 6 characters long",
+  "invalid_repeated_password_message": "Passwords don't match. Try again",
   "welcome_title": "Welcome",
   "invalid_name_message": "Enter name",
   "name": "Name",
   "forgot_you_password_message": "Forgot your password?",
   "send": "Send",
-  "generic_error_message": "Something went wrong"
+  "generic_error_message": "Something went wrong",
+  "water_label": "Water",
+  "customization_of_cups_label": "Customization of Cups"
 }

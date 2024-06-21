@@ -22,6 +22,9 @@ dependencies:
   firebase_core: ^3.1.0
   firebase_auth: ^5.1.0
   cloud_firestore: ^5.0.1
+  lottie: ^3.1.2
+  hive: ^2.2.3
+  dio: ^5.4.3+1
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +39,13 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/fonts/
+    - assets/animations/
+
+  fonts:
+    - family: Regular
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: SemiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf

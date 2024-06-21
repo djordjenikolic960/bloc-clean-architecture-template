@@ -41,21 +41,12 @@ class TextInputField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       style: context.textTheme.bodyMedium,
+      cursorColor: context.textTheme.bodyMedium?.color,
       decoration: InputDecoration(
         suffixIcon: suffixWidget,
         error: errorWidget,
-        focusedBorder: _getBorder(context.colorScheme.primary),
-        border: _getBorder(context.colorScheme.primary),
         labelText: label,
       ),
     );
   }
-
-  OutlineInputBorder _getBorder(Color color) => OutlineInputBorder(
-        borderSide: BorderSide(
-          width: Dimens.size2,
-          color: color,
-        ),
-        borderRadius: BorderRadius.circular(Dimens.radius24),
-      );
 }

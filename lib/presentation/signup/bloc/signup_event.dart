@@ -9,11 +9,13 @@ class SignupWithEmailAndPassword extends SignupEvent {
   final String email;
   final String password;
   final String name;
+  final String repeatedPassword;
 
   SignupWithEmailAndPassword(
     this.email,
     this.password,
     this.name,
+    this.repeatedPassword,
   );
 
   @override
@@ -21,7 +23,12 @@ class SignupWithEmailAndPassword extends SignupEvent {
         email,
         password,
         name,
+        repeatedPassword,
       ];
 }
 
 class UpdatePasswordVisibility extends SignupEvent {}
+
+class UpdateRepeatedPasswordVisibility extends SignupEvent {}
+
+

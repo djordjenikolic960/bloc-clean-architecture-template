@@ -7,7 +7,6 @@ class PrimaryButton extends StatelessWidget {
   final String label;
   final Color fillColor;
   final Color titleColor;
-  final double borderRadius;
 
   const PrimaryButton({
     super.key,
@@ -15,7 +14,6 @@ class PrimaryButton extends StatelessWidget {
     required this.label,
     required this.fillColor,
     required this.titleColor,
-    this.borderRadius = Dimens.size24,
   });
 
   @override
@@ -32,11 +30,18 @@ class PrimaryButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: Dimens.size16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
-                  borderRadius,
+                  Dimens.size24,
                 ),
               ),
             ),
-            child: Text(label),
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: Dimens.fontSize16,
+                fontFamily: "SemiBold",
+              ),
+            ),
           ),
         ),
       ],

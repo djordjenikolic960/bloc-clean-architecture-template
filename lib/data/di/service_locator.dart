@@ -1,18 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../domain/repository/app_config_repository.dart';
 import '../../domain/repository/auth_repository.dart';
+import '../../domain/repository/network_client_repository.dart';
+import '../../domain/repository/news_repository.dart';
 import '../../domain/repository/user_repository.dart';
-import '../data_source/remote/user_remote_data_source.dart';
-import '../data_source/remote/user_remote_data_source_impl.dart';
+import '../data_source/remote/network/network_client.dart';
+import '../data_source/remote/network/network_client_impl.dart';
+import '../data_source/remote/user/user_remote_data_source.dart';
+import '../data_source/remote/user/user_remote_data_source_impl.dart';
 import '../repository/app_config_repository_impl.dart';
 import '../repository/auth_repository_impl.dart';
+import '../repository/network_client_repository_impl.dart';
+import '../repository/news_repository_impl.dart';
 import '../repository/user_repository_impl.dart';
-import '../service/firebase_auth_service.dart';
-import '../service/shared_preferences_service.dart';
-import '../service/shared_preferences_service_impl.dart';
+import '../data_source/remote/app_auth/auth_service.dart';
+import '../data_source/remote/app_auth/firebase_auth_service.dart';
+import '../data_source/local/shared_preferences/shared_preferences_service.dart';
+import '../data_source/local/shared_preferences/shared_preferences_service_impl.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -23,7 +31,7 @@ T get<T extends Object>() {
 Future<void> init() async {
   _registerExternalServices();
   _registerServices();
-  //_registerNetworkClient();
+  _registerNetworkClient();
   //_registerLocalStorage();
   //_registerConverters();
   //_registerHelpers();
@@ -45,7 +53,7 @@ void _registerServices() {
     () => SharedPreferencesServiceImpl(),
   );
 
-  serviceLocator.registerLazySingleton<FirebaseAuthService>(
+  serviceLocator.registerLazySingleton<AuthService<User>>(
     () => FirebaseAuthService(
       serviceLocator(),
     ),
@@ -53,6 +61,17 @@ void _registerServices() {
 
   serviceLocator.registerLazySingleton<UserRemoteDataSource>(
     () => UserRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+}
+
+void _registerNetworkClient() {
+  serviceLocator.registerSingleton<Dio>(
+    Dio(),
+  );
+  serviceLocator.registerLazySingleton<NetworkClient>(
+    () => NetworkClientImpl(
       serviceLocator(),
     ),
   );
@@ -73,6 +92,18 @@ void _registerRepositories() {
 
   serviceLocator.registerLazySingleton<UserRepository>(
     () => UserRepositoryImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<NetworkClientRepository>(
+    () => NetworkClientRepositoryImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<NewsRepository>(
+    () => NewsRepositoryImpl(
       serviceLocator(),
     ),
   );

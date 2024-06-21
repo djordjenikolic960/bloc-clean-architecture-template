@@ -24,6 +24,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repeatedPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +48,15 @@ class _SignupScreenState extends State<SignupScreen> {
               alignment: Alignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(Dimens.size16),
+                  padding: const EdgeInsets.all(Dimens.size20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const Spacer(),
                       Text(
                         context.l10n.welcome_title,
                         style: context.textTheme.titleLarge,
                       ),
-                      const SizedBox(
-                        height: Dimens.size64,
-                      ),
-                      TextInputField(
-                        controller: _nameController,
-                        isError: !state.isNameValid,
-                        errorMessage: context.l10n.invalid_name_message,
-                        label: context.l10n.name,
-                        keyboardType: TextInputType.name,
-                      ),
-                      const SizedBox(height: Dimens.size16),
+                      const Spacer(),
                       TextInputField(
                         controller: _emailController,
                         isError: !state.isEmailValid,
@@ -72,7 +64,15 @@ class _SignupScreenState extends State<SignupScreen> {
                         label: context.l10n.email,
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      const SizedBox(height: Dimens.size16),
+                      const SizedBox(height: Dimens.size12),
+                      TextInputField(
+                        controller: _nameController,
+                        isError: !state.isNameValid,
+                        errorMessage: context.l10n.invalid_name_message,
+                        label: context.l10n.name,
+                        keyboardType: TextInputType.name,
+                      ),
+                      const SizedBox(height: Dimens.size12),
                       TextInputField(
                         controller: _passwordController,
                         isError: !state.isPasswordValid,
@@ -89,7 +89,25 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         keyboardType: TextInputType.visiblePassword,
                       ),
-                      const SizedBox(height: Dimens.size64),
+                      const SizedBox(height: Dimens.size12),
+                      TextInputField(
+                        controller: _repeatedPasswordController,
+                        isError: !state.isRepeatedPasswordValid,
+                        errorMessage:
+                            context.l10n.invalid_repeated_password_message,
+                        label: context.l10n.repeat_password,
+                        obscureText: !state.showRepeatedPassword,
+                        suffixIcon: state.showRepeatedPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        suffixIconOnClick: () {
+                          context.read<SignupBloc>().add(
+                                UpdateRepeatedPasswordVisibility(),
+                              );
+                        },
+                        keyboardType: TextInputType.visiblePassword,
+                      ),
+                      const Spacer(),
                       PrimaryButton(
                         onPressed: () {
                           context.read<SignupBloc>().add(
@@ -97,6 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   _emailController.text,
                                   _passwordController.text,
                                   _nameController.text,
+                                  _repeatedPasswordController.text,
                                 ),
                               );
                         },
@@ -104,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         fillColor: context.colorScheme.primary,
                         titleColor: Colors.white,
                       ),
-                      const SizedBox(height: Dimens.size16),
+                      const SizedBox(height: Dimens.size12),
                       InkWell(
                         onTap: () {
                           context.go(Routes.login.path);
@@ -128,6 +147,7 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _repeatedPasswordController.dispose();
     super.dispose();
   }
 }

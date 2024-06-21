@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+     return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -64,5 +61,15 @@ class DefaultFirebaseOptions {
     projectId: 'bloc-clean-architecture-911ca',
     storageBucket: 'bloc-clean-architecture-911ca.appspot.com',
     iosBundleId: 'com.example.blocCleanArchitectureTemplate',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: "AIzaSyCZvJMaiX6cAToWvMB9zhiZ4Kff2DiTlUc",
+    authDomain: "bloc-clean-architecture-911ca.firebaseapp.com",
+    projectId: "bloc-clean-architecture-911ca",
+    storageBucket: "bloc-clean-architecture-911ca.appspot.com",
+    messagingSenderId: "991034804524",
+    appId: "1:991034804524:web:b885439764074422ed0489",
+    measurementId: "G-M1YEKZJWBB",
   );
 }

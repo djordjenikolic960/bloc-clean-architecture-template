@@ -36,10 +36,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       },
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: Colors.transparent,
+            iconTheme: IconThemeData(
+              color: context.textTheme.bodyMedium?.color,
+            ),
+          ),
           body: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.all(Dimens.size16),
+                padding: const EdgeInsets.all(Dimens.size20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

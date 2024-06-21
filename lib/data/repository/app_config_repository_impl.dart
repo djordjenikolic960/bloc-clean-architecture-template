@@ -6,7 +6,7 @@ import '../../domain/entity/app_config.dart';
 import '../../domain/repository/app_config_repository.dart';
 import '../../l10n/l10n.dart';
 import '../../presentation/theme/themes.dart';
-import '../service/shared_preferences_service.dart';
+import '../data_source/local/shared_preferences/shared_preferences_service.dart';
 
 class AppConfigRepositoryImpl implements AppConfigRepository {
   static const _localeKey = "locale";

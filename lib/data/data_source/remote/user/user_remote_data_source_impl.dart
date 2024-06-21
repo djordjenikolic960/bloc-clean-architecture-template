@@ -1,4 +1,4 @@
-import '../../model/user_model.dart';
+import '../../../model/user_model.dart';
 import 'user_remote_data_source.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

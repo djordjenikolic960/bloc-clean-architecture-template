@@ -14,6 +14,10 @@ import '../use_case/auth/sign_out_use_case.dart';
 import '../use_case/auth/sign_out_use_case_impl.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case_impl.dart';
+import '../use_case/network_client/add_auth_header_use_case.dart';
+import '../use_case/network_client/add_auth_header_use_case_impl.dart';
+import '../use_case/news/get_news_use_case.dart';
+import '../use_case/news/get_news_use_case_impl.dart';
 import '../use_case/user/get_user_as_stream_use_case.dart';
 import '../use_case/user/get_user_as_stream_use_case_impl.dart';
 import '../use_case/user/save_user_use_case.dart';
@@ -45,11 +49,13 @@ void _registerUseCases() {
   serviceLocator.registerFactory<SignInWithEmailAndPasswordUseCase>(
     () => SignInWithEmailAndPasswordUseCaseImpl(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerFactory<SignUpWithEmailAndPasswordUseCase>(
     () => SignUpWithEmailAndPasswordUseCaseImpl(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -81,6 +87,19 @@ void _registerUseCases() {
 
   serviceLocator.registerFactory<SendPasswordResetEmailUseCase>(
     () => SendPasswordResetEmailUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<AddAuthHeaderUseCase>(
+    () => AddAuthHeaderUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<GetNewsUseCase>(
+    () => GetNewsUseCaseImpl(
+      serviceLocator(),
       serviceLocator(),
     ),
   );
