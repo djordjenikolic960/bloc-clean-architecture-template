@@ -1,6 +1,6 @@
-
 import '../../domain/repository/news_repository.dart';
 import '../data_source/remote/network/network_client.dart';
+import '../model/news_response_model.dart';
 
 class NewsRepositoryImpl implements NewsRepository {
   final NetworkClient _networkClient;
@@ -10,19 +10,21 @@ class NewsRepositoryImpl implements NewsRepository {
   );
 
   @override
-  Future<Map<String, dynamic>> get(
+  Future<NewsResponseModel> get(
     String query,
     String fromDate,
     String sortBy,
   ) async {
-    final data = await _networkClient.get<Map<String, dynamic>>(
+    final response = await _networkClient.get<Map<String, dynamic>>(
       "/everything",
       {
         "q": query,
         "from": fromDate,
         "sortBy": sortBy,
+        "pageSize": "10",
+        "page": "1",
       },
     );
-    return data;
+    return NewsResponseModel.fromJson(response);
   }
 }

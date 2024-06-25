@@ -31,6 +31,7 @@ final lightTheme = ThemeData(
     color: AppColors.iconColorLight,
   ),
   appBarTheme: const AppBarTheme(
+    scrolledUnderElevation: Constant.zero,
     titleTextStyle: TextStyle(
       color: AppColors.appBarTitleColorLight,
       fontSize: Dimens.fontSize22,
@@ -104,6 +105,7 @@ final darkTheme = ThemeData(
     unselectedItemColor: AppColors.bottomNavBarUnSelectedItemColorDark,
   ),
   appBarTheme: const AppBarTheme(
+    scrolledUnderElevation: Constant.zero,
     titleTextStyle: TextStyle(
       color: AppColors.appBarTitleColorDark,
       fontSize: Dimens.fontSize22,

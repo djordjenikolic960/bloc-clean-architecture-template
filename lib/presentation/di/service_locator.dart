@@ -4,7 +4,7 @@ import '../../shared/app_config/bloc/app_config_bloc.dart';
 import '../../shared/auth/bloc/auth_bloc.dart';
 import '../bottom_navigation/bloc/bottom_navigation_bloc.dart';
 import '../forgot_password/bloc/forgot_password_bloc.dart';
-import '../home/bloc/news_cubit.dart';
+import '../home/bloc/news_bloc.dart';
 import '../login/bloc/login_bloc.dart';
 import '../router/router.dart';
 import '../router/router_impl.dart';
@@ -59,8 +59,8 @@ void _registerBlocs() {
     ),
   );
 
-  serviceLocator.registerFactory<NewsCubit>(
-    () => NewsCubit(
+  serviceLocator.registerFactory<NewsBloc>(
+    () => NewsBloc(
       serviceLocator(),
     ),
   );

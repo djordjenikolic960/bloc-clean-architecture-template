@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-import 'auth_interceptor.dart';
 import 'constants.dart';
 import 'network_client.dart';
 

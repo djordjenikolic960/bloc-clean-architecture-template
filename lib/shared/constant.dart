@@ -7,4 +7,5 @@ class Constant {
   static const passwordMinLength = 6;
   static const fontFamilyRegular = "Regular";
   static const fontFamilySemiBold = "SemiBold";
+  static const dateLocalFormat = "dd/MM/yyyy";
 }
