@@ -4,7 +4,7 @@ class SourceModel {
     required this.name,
   });
 
-  final dynamic id;
+  final String? id;
   final String? name;
 
   factory SourceModel.fromJson(Map<String, dynamic> json) {

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/model/news_response_model.dart';
-import '../../../domain/entity/news_sort_options.dart';
-import '../../../shared/constant.dart';
+import '../../../../../data/model/news_response_model.dart';
+import '../../../../../domain/entity/news_sort_options.dart';
+import '../../../../../shared/constant.dart';
 
 @immutable
 class NewsState extends Equatable {

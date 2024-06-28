@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         label: context.l10n.log_in,
                         fillColor: context.colorScheme.primary,
-                        titleColor: Colors.white,
+                        labelColor: Colors.white,
                       ),
                       const SizedBox(height: Dimens.size16),
                       InkWell(

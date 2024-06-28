@@ -87,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       },
                       label: context.l10n.send,
                       fillColor: context.colorScheme.primary,
-                      titleColor: Colors.white,
+                      labelColor: Colors.white,
                     ),
                   ],
                 ),

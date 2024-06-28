@@ -16,10 +16,16 @@ import '../use_case/auth/sign_up_with_email_and_password_use_case.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case_impl.dart';
 import '../use_case/network_client/add_auth_header_use_case.dart';
 import '../use_case/network_client/add_auth_header_use_case_impl.dart';
+import '../use_case/news/delete_article_use_case.dart';
+import '../use_case/news/delete_article_use_case_impl.dart';
+import '../use_case/news/get_favourite_articles_use_case.dart';
+import '../use_case/news/get_favourite_articles_use_case_impl.dart';
 import '../use_case/news/get_news_use_case.dart';
 import '../use_case/news/get_news_use_case_impl.dart';
 import '../use_case/user/get_user_as_stream_use_case.dart';
 import '../use_case/user/get_user_as_stream_use_case_impl.dart';
+import '../use_case/user/save_favourite_article_use_case.dart';
+import '../use_case/user/save_favourite_article_use_case_impl.dart';
 import '../use_case/user/save_user_use_case.dart';
 import '../use_case/user/save_user_use_case_impl.dart';
 
@@ -100,6 +106,24 @@ void _registerUseCases() {
   serviceLocator.registerFactory<GetNewsUseCase>(
     () => GetNewsUseCaseImpl(
       serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<SaveFavouriteArticleUseCase>(
+    () => SaveFavouriteArticleUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<GetFavouriteArticlesUseCase>(
+    () => GetFavouriteArticlesUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<DeleteArticleUseCase>(
+    () => DeleteArticleUseCaseImpl(
       serviceLocator(),
     ),
   );

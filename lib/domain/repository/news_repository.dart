@@ -1,3 +1,4 @@
+import '../../data/model/article_model.dart';
 import '../../data/model/news_response_model.dart';
 
 abstract class NewsRepository {
@@ -6,4 +7,10 @@ abstract class NewsRepository {
     String fromDate,
     String sortBy,
   );
+
+  Future<void> saveFavouriteArticle(ArticleModel article);
+
+  Stream<List<ArticleModel>> getFavouriteArticles();
+
+  Future<void> deleteArticle(ArticleModel article);
 }

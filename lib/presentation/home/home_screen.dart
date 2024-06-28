@@ -1,83 +1,74 @@
-import '../../domain/entity/news_sort_options.dart';
+import 'tabs/news/bloc/news_bloc.dart';
+
+import 'tabs/favourite_articles/bloc/favourite_articles_bloc.dart';
+import 'tabs/favourite_articles/favourite_news_tab.dart';
+
+import '../../shared/dimens.dart';
+
 import '../../l10n/localization_extension.dart';
-import '../widgets/loading_widget.dart';
-import 'bloc/news_bloc.dart';
-import 'bloc/news_event.dart';
-import 'bloc/news_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/di/service_locator.dart';
-import 'widgets/article_widget.dart';
-import 'widgets/search_widget.dart';
+import 'tabs/news/news_tab.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider<NewsBloc>(
-      create: (context) => serviceLocator.get<NewsBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NewsBloc>(
+          create: (_) => serviceLocator.get<NewsBloc>(),
+        ),
+        BlocProvider<FavouriteArticlesBloc>(
+          create: (_) => serviceLocator.get<FavouriteArticlesBloc>(),
+        ),
+      ],
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: AppBar(
-              title: SearchWidget(
-                onSearchQueryChanged: (value) {
-                  context.read<NewsBloc>().add(SearchQueryChange(value));
-                },
-              ),
-              actions: [
-                PopupMenuButton<NewsSortOptions>(
-                  icon: const Icon(Icons.sort_outlined),
-                  onSelected: (sortOption) {
-                    context.read<NewsBloc>().add(
-                          SortOptionChange(
-                            sortOption,
-                          ),
-                        );
-                  },
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      value: NewsSortOptions.relevancy,
-                      child: Text(
-                        context.l10n.sort_option_relevancy,
-                      ),
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(Dimens.size56),
+              child: AppBar(
+                bottom: TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  controller: _tabController,
+                  tabs: [
+                    Tab(
+                      text: context.l10n.news_label,
                     ),
-                    PopupMenuItem(
-                      value: NewsSortOptions.popularity,
-                      child: Text(
-                        context.l10n.sort_option_popularity,
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: NewsSortOptions.publishedAt,
-                      child: Text(
-                        context.l10n.sort_option_published_at,
-                      ),
+                    Tab(
+                      text: context.l10n.favourite_label,
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
-            body: BlocBuilder<NewsBloc, NewsState>(
-              builder: (context, state) {
-                if (state.news != null) {
-                  return ListView.builder(
-                    itemCount: state.news!.articles.length,
-                    itemBuilder: (context, index) =>
-                        ArticleWidget(article: state.news!.articles[index]),
-                  );
-                } else if (state.isError) {
-                  return const Center(
-                    child: Text("error"),
-                  );
-                } else if (state.isLoading) {
-                  return const LoadingWidget();
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
+            body: TabBarView(
+              controller: _tabController,
+              children: const [
+                NewsTab(),
+                FavouriteArticlesTab(),
+              ],
             ),
           );
         },

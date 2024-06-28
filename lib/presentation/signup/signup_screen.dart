@@ -121,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         label: context.l10n.sign_up,
                         fillColor: context.colorScheme.primary,
-                        titleColor: Colors.white,
+                        labelColor: Colors.white,
                       ),
                       const SizedBox(height: Dimens.size12),
                       InkWell(

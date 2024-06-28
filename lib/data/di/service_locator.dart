@@ -2,12 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../domain/repository/app_config_repository.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/repository/network_client_repository.dart';
 import '../../domain/repository/news_repository.dart';
 import '../../domain/repository/user_repository.dart';
+import '../converters/article_converter.dart';
+import '../converters/source_converter.dart';
+import '../data_source/local/database/collections/article/article_collection.dart';
+import '../data_source/local/database/database_manager.dart';
+import '../data_source/local/database/isar_database_manager_impl.dart';
 import '../data_source/remote/network/network_client.dart';
 import '../data_source/remote/network/network_client_impl.dart';
 import '../data_source/remote/user/user_remote_data_source.dart';
@@ -28,14 +35,37 @@ T get<T extends Object>() {
   return serviceLocator.get<T>();
 }
 
-Future<void> init() async {
+Future<void> init({Isar? isar}) async {
+  await _registerLocalDatabase(isar: isar);
   _registerExternalServices();
   _registerServices();
   _registerNetworkClient();
   //_registerLocalStorage();
-  //_registerConverters();
+  _registerConverters();
   //_registerHelpers();
   _registerRepositories();
+}
+
+Future<void> _registerLocalDatabase({Isar? isar}) async {
+  final Isar resultIsar;
+  if (isar != null) {
+    resultIsar = isar;
+  } else {
+    final directory = await getApplicationDocumentsDirectory();
+    resultIsar = await Isar.open(
+      [
+        ArticleEntitySchema,
+      ],
+      directory: directory.path,
+    );
+  }
+  serviceLocator.registerSingleton<Isar>(resultIsar);
+
+  serviceLocator.registerFactory<DatabaseManager>(
+    () => IsarDatabaseManagerImpl(
+      resultIsar,
+    ),
+  );
 }
 
 void _registerExternalServices() {
@@ -77,6 +107,18 @@ void _registerNetworkClient() {
   );
 }
 
+void _registerConverters() {
+  serviceLocator.registerSingleton<SourceConverter>(
+    SourceConverter(),
+  );
+
+  serviceLocator.registerSingleton<ArticleConverter>(
+    ArticleConverter(
+      serviceLocator(),
+    ),
+  );
+}
+
 void _registerRepositories() {
   serviceLocator.registerLazySingleton<AppConfigRepository>(
     () => AppConfigRepositoryImpl(
@@ -104,6 +146,8 @@ void _registerRepositories() {
 
   serviceLocator.registerLazySingleton<NewsRepository>(
     () => NewsRepositoryImpl(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
     ),
   );

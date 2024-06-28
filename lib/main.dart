@@ -34,7 +34,6 @@ Future<void> _initFirebase() async {
   );
   await FirebaseMessaging.instance.setAutoInitEnabled(true);
   final fcmToken = await FirebaseMessaging.instance.getToken();
-  print("FCMToken $fcmToken");
 }
 
 Future<void> _initDependencies() async {

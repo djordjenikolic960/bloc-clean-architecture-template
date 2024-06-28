@@ -1,11 +1,25 @@
-abstract interface class DatabaseManager<T> {
-  Future<void> insert(String table, T data);
+abstract class DatabaseManager {
+  Future<T?> getById<T>(final int id);
 
-  Future<void> update(int id, T data);
+  Future<void> put<T>(final T t);
 
-  Future<void> delete(String table, dynamic id);
+  Future<void> delete<T>(final int id);
 
-  Future<List<T>> getAll(String table);
+  Future<void> deleteAll<T>(final List<int> ids);
 
-  Future<T?> get(String table, dynamic id);
+  Future<void> clearAll<T>();
+
+  Future<void> clearAllWithoutTransaction<T>();
+
+  Future<void> writeTransactionAsync<T>(Function transaction);
+
+  Future<void> writeTransactionSync<T>(Function transaction);
+
+  Future<void> putAll<T>(final List<T> t);
+
+  Future<void> putAllWithoutTransaction<T>(final List<T> t);
+
+  Stream<List<T>> getCollectionStream<T>();
+
+  Stream<T?> getStream<T>(final int id);
 }

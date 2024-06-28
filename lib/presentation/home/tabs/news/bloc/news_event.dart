@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/entity/news_sort_options.dart';
+import '../../../../../data/model/article_model.dart';
+import '../../../../../domain/entity/news_sort_options.dart';
 
 sealed class NewsEvent extends Equatable {
   @override
@@ -23,4 +24,13 @@ class SearchQueryChange extends NewsEvent {
 
   @override
   List<Object?> get props => [query];
+}
+
+class SaveFavouriteArticle extends NewsEvent {
+  final ArticleModel article;
+
+  SaveFavouriteArticle(this.article);
+
+  @override
+  List<Object?> get props => [article];
 }

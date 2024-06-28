@@ -3,6 +3,7 @@ import 'source_model.dart';
 
 class ArticleModel {
   ArticleModel({
+    this.id,
     required this.source,
     required this.author,
     required this.title,
@@ -13,6 +14,7 @@ class ArticleModel {
     required this.content,
   });
 
+  final int? id;
   final SourceModel? source;
   final String? author;
   final String? title;

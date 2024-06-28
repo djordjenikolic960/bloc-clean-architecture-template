@@ -1,4 +1,5 @@
 import '../../shared/constant.dart';
+import '../article/article_screen.dart';
 import '../bottom_navigation/bottom_navigation_screen.dart';
 import '../forgot_password/forgot_password_screen.dart';
 import '../home/home_screen.dart';
@@ -18,7 +19,8 @@ enum Routes {
   bottomNavigation(BottomNavigationScreen),
   home(HomeScreen),
   settings(SettingsScreen),
-  profile(ProfileScreen);
+  profile(ProfileScreen),
+  article(ArticleScreen);
 
   final Type _routeType;
 

@@ -27,5 +27,15 @@
   "generic_error_message": "Something went wrong",
   "sort_option_popularity": "Popularity",
   "sort_option_relevancy": "Relevancy",
-  "sort_option_published_at": "Published at"
+  "sort_option_published_at": "Published at",
+  "news_label": "News",
+  "favourite_label": "Favourite",
+  "no_results_label": "No Results",
+  "published_at_label": "Published at: ",
+  "delete_article_dialog_title": "Delete article",
+  "delete_article_dialog_text": "Are you sure that you want to delete this article?",
+  "delete_article_button_positive": "Delete",
+  "delete_article_button_negative": "Cancel",
+  "article_deleted_successfully_message": "Article deleted successfully",
+  "article_saved_to_favourite": "Article added to favourites"
 }

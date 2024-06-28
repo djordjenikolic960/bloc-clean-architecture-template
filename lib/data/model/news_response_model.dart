@@ -1,3 +1,4 @@
+import '../../shared/constant.dart';
 import 'article_model.dart';
 
 class NewsResponseModel {
@@ -19,6 +20,14 @@ class NewsResponseModel {
           ? []
           : List<ArticleModel>.from(
               json["articles"]!.map((x) => ArticleModel.fromJson(x))),
+    );
+  }
+
+  factory NewsResponseModel.empty() {
+    return NewsResponseModel(
+      status: Constant.emptyString,
+      totalResults: 0,
+      articles: [],
     );
   }
 }
