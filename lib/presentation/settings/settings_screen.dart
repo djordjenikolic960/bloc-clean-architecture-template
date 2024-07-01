@@ -22,9 +22,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(
-            height: 6,
-          ),
+          const Divider(),
           ListItem(
             title: context.l10n.language,
             icon: Icons.language,

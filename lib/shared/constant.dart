@@ -8,4 +8,5 @@ class Constant {
   static const fontFamilyRegular = "Regular";
   static const fontFamilySemiBold = "SemiBold";
   static const dateLocalFormat = "dd/MM/yyyy";
+  static const searchDateFormat = "DD-MM-YYYY";
 }

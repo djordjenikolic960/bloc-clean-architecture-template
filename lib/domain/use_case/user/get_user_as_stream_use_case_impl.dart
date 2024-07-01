@@ -9,7 +9,6 @@ class GetUserAsStreamUseCaseImpl implements GetUserAsStreamUseCase {
 
   @override
   Stream<UserEntity?> get(String id) {
-   return _userRepository.getUserAsStream(id);
+    return _userRepository.getUserAsStream(id);
   }
-
 }

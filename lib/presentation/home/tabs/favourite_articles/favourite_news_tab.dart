@@ -23,8 +23,8 @@ class FavouriteArticlesTab extends StatelessWidget {
               onTap: () => context.push(
                 Routes.article.path,
                 extra: ArticleScreenData(
-                  state.articles[index],
-                  true,
+                  article: state.articles[index],
+                  isFromRemoteApi: false,
                 ),
               ),
             ),

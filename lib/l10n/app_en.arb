@@ -37,5 +37,7 @@
   "delete_article_button_positive": "Delete",
   "delete_article_button_negative": "Cancel",
   "article_deleted_successfully_message": "Article deleted successfully",
-  "article_saved_to_favourite": "Article added to favourites"
+  "article_added_to_favourites": "Article added to favourites",
+  "article_removed_from_favourites": "Article removed from favourites",
+  "search_hint": "Search"
 }

@@ -11,8 +11,6 @@ import '../../shared/dimens.dart';
 import '../../shared/extension/build_context_extension.dart';
 import '../../shared/extension/date_time_extension.dart';
 import '../../shared/helpers/url_launcher_helper.dart';
-import '../home/tabs/news/bloc/news_bloc.dart';
-import '../home/tabs/news/bloc/news_event.dart';
 import '../widgets/dialog/confirm_dialog.dart';
 import 'bloc/article_bloc.dart';
 import 'bloc/article_event.dart';
@@ -20,12 +18,12 @@ import 'bloc/article_state.dart';
 
 class ArticleScreenData {
   final ArticleModel article;
-  final bool isFromDatabase;
+  final bool isFromRemoteApi;
 
-  ArticleScreenData(
-    this.article,
-    this.isFromDatabase,
-  );
+  ArticleScreenData({
+    required this.article,
+    required this.isFromRemoteApi,
+  });
 }
 
 class ArticleScreen extends StatelessWidget {
@@ -38,27 +36,10 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final articleBloc = context.read<ArticleBloc>();
     return BlocListener<ArticleBloc, ArticleState>(
       listener: (_, state) {
-        if (state is ArticleDeletedSuccess) {
-          context.pop();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                context.l10n.article_deleted_successfully_message,
-              ),
-            ),
-          );
-        }
-        if (state is ArticleDeletedFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                context.l10n.generic_error_message,
-              ),
-            ),
-          );
-        }
+        _handleStateChange(context, state);
       },
       child: Scaffold(
         appBar: AppBar(
@@ -68,8 +49,21 @@ class ArticleScreen extends StatelessWidget {
                 : Constant.emptyString,
           ),
           actions: [
-            articleScreenData.isFromDatabase
-                ? IconButton(
+            articleScreenData.isFromRemoteApi
+                ? BlocBuilder<ArticleBloc, ArticleState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        onPressed: () {
+                          articleBloc.add(
+                              UpdateFavouriteStatus(articleScreenData.article));
+                        },
+                        icon: Icon(articleBloc.isInDatabase
+                            ? Icons.star_rate_rounded
+                            : Icons.star_border_rounded),
+                      );
+                    },
+                  )
+                : IconButton(
                     onPressed: () {
                       ConfirmDialog(
                         context.l10n.delete_article_dialog_title,
@@ -87,21 +81,6 @@ class ArticleScreen extends StatelessWidget {
                       ).show(context);
                     },
                     icon: const Icon(Icons.delete_rounded),
-                  )
-                : IconButton(
-                    onPressed: () {
-                      serviceLocator.get<NewsBloc>().add(
-                            SaveFavouriteArticle(articleScreenData.article),
-                          );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            context.l10n.article_saved_to_favourite,
-                          ),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.star_border_rounded),
                   ),
           ],
         ),
@@ -199,6 +178,33 @@ class ArticleScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _handleStateChange(BuildContext context, ArticleState state) {
+    String message;
+
+    if (state is ArticleDeletedSuccess) {
+      context.pop();
+      message = context.l10n.article_deleted_successfully_message;
+    } else if (state is ArticleAddedToFavourites) {
+      message = context.l10n.article_added_to_favourites;
+    } else if (state is ArticleDeletedFailure) {
+      message = context.l10n.generic_error_message;
+    } else if (state is ArticleRemovedFromFavourites) {
+      message = context.l10n.article_removed_from_favourites;
+    } else {
+      return;
+    }
+
+    _showSnackBar(context, message);
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }

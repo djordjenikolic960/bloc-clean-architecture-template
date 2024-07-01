@@ -6,7 +6,6 @@ import '../../l10n/localization_extension.dart';
 import '../../shared/auth/bloc/auth_bloc.dart';
 import '../../shared/auth/bloc/auth_event.dart';
 import '../../shared/auth/bloc/auth_state.dart';
-import '../../shared/dimens.dart';
 import '../router/routes.dart';
 import '../widgets/list_item.dart';
 
@@ -27,9 +26,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            const SizedBox(
-              height: Dimens.size6,
-            ),
+            const Divider(),
             ListItem(
               title: context.l10n.sign_out,
               icon: Icons.logout_outlined,

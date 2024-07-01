@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../article/article_screen.dart';
 import '../article/bloc/article_bloc.dart';
+import '../article/bloc/article_event.dart';
 import '../di/service_locator.dart';
 import '../forgot_password/bloc/forgot_password_bloc.dart';
 import '../forgot_password/forgot_password_screen.dart';
@@ -87,7 +88,9 @@ class RouterImpl implements app_router.Router {
         name: Routes.article.routerName,
         path: Routes.article.path,
         builder: (_, state) => BlocProvider<ArticleBloc>(
-            create: (_) => serviceLocator.get<ArticleBloc>(),
+            create: (_) => serviceLocator.get<ArticleBloc>()
+              ..add(
+                  CheckArticleInDb((state.extra as ArticleScreenData).article)),
             child: ArticleScreen(
                 articleScreenData: state.extra as ArticleScreenData)),
       );

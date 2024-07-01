@@ -4,6 +4,7 @@ import '../../../data/model/article_model.dart';
 import '../../../shared/dimens.dart';
 import '../../../shared/extension/build_context_extension.dart';
 import '../../../shared/extension/date_time_extension.dart';
+
 class ArticleWidget extends StatelessWidget {
   static const _titleMaxLines = 2;
   static const _contentMaxLines = 2;

@@ -12,6 +12,4 @@ class GetUserUseCaseImpl implements GetUserUseCase {
   User? get() {
     return _authRepository.getCurrentUser();
   }
-
-
 }

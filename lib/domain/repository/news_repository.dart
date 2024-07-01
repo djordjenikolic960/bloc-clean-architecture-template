@@ -13,4 +13,6 @@ abstract class NewsRepository {
   Stream<List<ArticleModel>> getFavouriteArticles();
 
   Future<void> deleteArticle(ArticleModel article);
+
+  Future<bool> checkArticleInDatabase(ArticleModel article);
 }

@@ -82,8 +82,8 @@ class NewsTab extends StatelessWidget {
                   onTap: () => context.push(
                     Routes.article.path,
                     extra: ArticleScreenData(
-                      state.news!.articles[index],
-                      false,
+                      article: state.news!.articles[index],
+                      isFromRemoteApi: true,
                     ),
                   ),
                 ),

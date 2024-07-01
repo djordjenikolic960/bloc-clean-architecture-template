@@ -13,7 +13,7 @@ class UrlLauncherHelper {
     }
 
     final isLaunched =
-    await _urlLauncherWrapper.launch(uri, LaunchMode.externalApplication);
+        await _urlLauncherWrapper.launch(uri, LaunchMode.externalApplication);
     if (!isLaunched) {
       throw Exception();
     }

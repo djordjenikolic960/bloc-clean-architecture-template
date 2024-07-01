@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 import '../../../../../data/model/article_model.dart';

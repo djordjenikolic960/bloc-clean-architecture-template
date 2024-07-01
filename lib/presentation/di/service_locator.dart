@@ -77,7 +77,6 @@ void _registerBlocs() {
   serviceLocator.registerFactory<NewsBloc>(
     () => NewsBloc(
       serviceLocator(),
-      serviceLocator(),
     ),
   );
 
@@ -89,6 +88,8 @@ void _registerBlocs() {
 
   serviceLocator.registerFactory<ArticleBloc>(
     () => ArticleBloc(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
     ),
   );

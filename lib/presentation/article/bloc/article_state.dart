@@ -1,12 +1,40 @@
 import 'package:equatable/equatable.dart';
 
 abstract class ArticleState extends Equatable {
+  const ArticleState();
+
   @override
   List<Object?> get props => [];
 }
 
-class ArticleDeletedSuccess extends ArticleState {}
+class ArticleInitialState extends ArticleState {
+  const ArticleInitialState();
+}
 
-class ArticleDeletedFailure extends ArticleState {}
+class ArticleLoadSuccess extends ArticleState {
+  const ArticleLoadSuccess();
+}
 
-class ArticleInitialState extends ArticleState {}
+class ArticleDeletedSuccess extends ArticleState {
+  const ArticleDeletedSuccess();
+}
+
+class ArticleDeletedFailure extends ArticleState {
+  const ArticleDeletedFailure();
+}
+
+class ArticleAddedToFavourites extends ArticleState {
+  const ArticleAddedToFavourites();
+}
+
+class ArticleAddToFavouritesFailure extends ArticleState {
+  const ArticleAddToFavouritesFailure();
+}
+
+class ArticleRemovedFromFavourites extends ArticleState {
+  const ArticleRemovedFromFavourites();
+}
+
+class ArticleRemoveFromFavouritesFailure extends ArticleState {
+  const ArticleRemoveFromFavouritesFailure();
+}

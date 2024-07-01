@@ -7,6 +7,7 @@ class IsarDatabaseManagerImpl implements DatabaseManager {
 
   IsarDatabaseManagerImpl(this._isar);
 
+  @override
   IsarCollection<T> getCollection<T>() {
     return _isar.collection<T>();
   }

@@ -20,9 +20,8 @@ class GetNewsUseCaseImpl implements GetNewsUseCase {
     NewsSortOptions? sortOption,
   ) async {
     _addAuthHeaderUseCase.addAuthHeader();
-    final sortBy = sortOption == null
-        ? NewsSortOptions.publishedAt.name
-        : sortOption.name;
+    final sortBy =
+        sortOption == null ? NewsSortOptions.publishedAt.name : sortOption.name;
     return await _newsRepository.get(
       query,
       fromDate,

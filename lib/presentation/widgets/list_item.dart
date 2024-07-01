@@ -15,6 +15,7 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final leading = icon != null ? Icon(icon) : null;
     return Column(
       children: [
         ListTile(
@@ -23,7 +24,7 @@ class ListItem extends StatelessWidget {
             title,
             style: context.textTheme.bodyMedium,
           ),
-          leading: icon != null ? Icon(icon) : null,
+          leading: leading,
         ),
         const Divider(),
       ],

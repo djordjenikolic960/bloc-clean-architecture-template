@@ -5,19 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../data/model/news_response_model.dart';
 import '../../../../../domain/use_case/news/get_news_use_case.dart';
-import '../../../../../domain/use_case/user/save_favourite_article_use_case.dart';
+import '../../../../../shared/extension/date_time_extension.dart';
 import 'news_event.dart';
 import 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final GetNewsUseCase _getNewsUseCase;
-  final SaveFavouriteArticleUseCase _saveFavouriteArticleUseCase;
   static const _debounceDurationInMilliseconds = 300;
   static const _minQueryLength = 2;
 
   NewsBloc(
     this._getNewsUseCase,
-    this._saveFavouriteArticleUseCase,
   ) : super(NewsState.empty()) {
     on<SortOptionChange>(_emitSortOptionChange);
     on<SearchQueryChange>(
@@ -28,7 +26,6 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         ),
       ),
     );
-    on<SaveFavouriteArticle>(_emitSaveFavouriteArticle);
   }
 
   FutureOr<void> _emitSortOptionChange(
@@ -40,7 +37,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       try {
         final news = await _getNewsUseCase.get(
           state.query,
-          "25-06-2024",
+          DateTime.now().toSearchDateFormat,
           event.newsSortOptions,
         );
         emit(state.copyWith(
@@ -70,7 +67,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       try {
         final news = await _getNewsUseCase.get(
           event.query,
-          "25-06-2024",
+          DateTime.now().toSearchDateFormat,
           state.sortOption,
         );
         emit(state.copyWith(
@@ -89,17 +86,6 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
           news: NewsResponseModel.empty(),
         ),
       );
-    }
-  }
-
-  FutureOr<void> _emitSaveFavouriteArticle(
-    SaveFavouriteArticle event,
-    Emitter<NewsState> emit,
-  ) async {
-    try {
-      await _saveFavouriteArticleUseCase.save(event.article);
-    } catch (e) {
-      print(e);
     }
   }
 }

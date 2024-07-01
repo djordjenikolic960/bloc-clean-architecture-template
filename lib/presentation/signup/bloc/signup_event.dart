@@ -30,5 +30,3 @@ class SignupWithEmailAndPassword extends SignupEvent {
 class UpdatePasswordVisibility extends SignupEvent {}
 
 class UpdateRepeatedPasswordVisibility extends SignupEvent {}
-
-

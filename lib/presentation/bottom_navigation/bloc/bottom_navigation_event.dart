@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 import '../screen.dart';
 
-
 @immutable
 abstract interface class BottomNavigationEvent extends Equatable {}
 

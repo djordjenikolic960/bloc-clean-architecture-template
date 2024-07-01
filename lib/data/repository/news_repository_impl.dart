@@ -1,3 +1,5 @@
+import 'package:isar/isar.dart';
+
 import '../../domain/repository/news_repository.dart';
 import '../converters/article_converter.dart';
 import '../data_source/local/database/collections/article/article_collection.dart';
@@ -46,13 +48,41 @@ class NewsRepositoryImpl implements NewsRepository {
   Stream<List<ArticleModel>> getFavouriteArticles() {
     return _databaseManager.getCollectionStream<ArticleEntity>().map(
           (entities) => entities
-              .map((entity) => _articleConverter.fromEntity(entity),)
+              .map((entity) => _articleConverter.fromEntity(entity))
               .toList(),
         );
   }
 
   @override
   Future<void> deleteArticle(ArticleModel article) async {
-    await _databaseManager.delete<ArticleEntity>(article.id!);
+    if (article.id != null) {
+      await _databaseManager.delete<ArticleEntity>(article.id!);
+    } else {
+      final articleEntity = await _databaseManager
+          .getCollection<ArticleEntity>()
+          .filter()
+          .authorEqualTo(article.author)
+          .titleEqualTo(article.title)
+          .descriptionEqualTo(article.description)
+          .contentEqualTo(article.content)
+          .findFirst();
+      if (articleEntity != null) {
+        await _databaseManager.delete<ArticleEntity>(articleEntity.id);
+      }
+    }
+  }
+
+  @override
+  Future<bool> checkArticleInDatabase(ArticleModel article) async {
+    final articleEntity = await _databaseManager
+        .getCollection<ArticleEntity>()
+        .filter()
+        .authorEqualTo(article.author)
+        .titleEqualTo(article.title)
+        .descriptionEqualTo(article.description)
+        .contentEqualTo(article.content)
+        .findFirst();
+
+    return articleEntity != null;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/localization_extension.dart';
 import '../../widgets/text_input_field.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return TextInputField(
       controller: _controller,
       isError: false,
-      label: "Search",
+      label: context.l10n.search_hint,
       keyboardType: TextInputType.none,
     );
   }

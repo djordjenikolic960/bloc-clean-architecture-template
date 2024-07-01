@@ -1,5 +1,5 @@
 import '../../../data/model/article_model.dart';
 
-abstract class SaveFavouriteArticleUseCase {
-  Future<void> save(ArticleModel article);
+abstract class AddArticleToFavouritesUseCase {
+  Future<void> add(ArticleModel article);
 }

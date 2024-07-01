@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 class AppColors {
-
   // light theme
   static const scaffoldBackgroundColorLight = Color(0xFFFFFFFF);
   static const dividerColorLight = Color(0xFFE0E0E0);

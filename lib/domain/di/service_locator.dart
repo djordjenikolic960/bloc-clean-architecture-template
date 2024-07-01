@@ -22,6 +22,8 @@ import '../use_case/news/get_favourite_articles_use_case.dart';
 import '../use_case/news/get_favourite_articles_use_case_impl.dart';
 import '../use_case/news/get_news_use_case.dart';
 import '../use_case/news/get_news_use_case_impl.dart';
+import '../use_case/news/check_article_in_database_use_case.dart';
+import '../use_case/news/check_article_in_database_use_case_impl.dart';
 import '../use_case/user/get_user_as_stream_use_case.dart';
 import '../use_case/user/get_user_as_stream_use_case_impl.dart';
 import '../use_case/user/save_favourite_article_use_case.dart';
@@ -110,7 +112,7 @@ void _registerUseCases() {
     ),
   );
 
-  serviceLocator.registerFactory<SaveFavouriteArticleUseCase>(
+  serviceLocator.registerFactory<AddArticleToFavouritesUseCase>(
     () => SaveFavouriteArticleUseCaseImpl(
       serviceLocator(),
     ),
@@ -124,6 +126,12 @@ void _registerUseCases() {
 
   serviceLocator.registerFactory<DeleteArticleUseCase>(
     () => DeleteArticleUseCaseImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<CheckArticleInDatabaseUseCase>(
+    () => CheckArticleInDatabaseUseCaseImpl(
       serviceLocator(),
     ),
   );

@@ -1,3 +1,5 @@
+import 'package:isar/isar.dart';
+
 abstract class DatabaseManager {
   Future<T?> getById<T>(final int id);
 
@@ -22,4 +24,6 @@ abstract class DatabaseManager {
   Stream<List<T>> getCollectionStream<T>();
 
   Stream<T?> getStream<T>(final int id);
+
+  IsarCollection<T> getCollection<T>();
 }
