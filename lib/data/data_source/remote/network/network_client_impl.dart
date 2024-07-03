@@ -60,31 +60,3 @@ class NetworkClientImpl implements NetworkClient {
     return await _dio.put(path, data: body) as T;
   }
 }
-
-class ApiService {
-  final Dio _dio;
-
-  ApiService()
-      : _dio = Dio(BaseOptions(
-          baseUrl: 'https://newsapi.org/v2',
-          headers: {
-            'Authorization': 'Bearer 7d2ed4aa0ba3486ca4eb186e7ebd1956',
-          },
-        ));
-
-  Future<Response> fetchData(
-      {required String query,
-      required String fromDate,
-      required String sortBy}) async {
-    try {
-      final response = await _dio.get('/everything', queryParameters: {
-        'q': query,
-        'from': fromDate,
-        'sortBy': sortBy,
-      });
-      return response;
-    } catch (e) {
-      throw Exception('Failed to fetch data: $e');
-    }
-  }
-}

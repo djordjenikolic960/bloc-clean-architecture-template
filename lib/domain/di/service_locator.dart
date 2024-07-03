@@ -6,10 +6,10 @@ import '../use_case/app_config/set_app_config_use_case.dart';
 import '../use_case/app_config/set_app_config_use_case_impl.dart';
 import '../use_case/auth/get_auth_state_change_use_case.dart';
 import '../use_case/auth/get_auth_state_change_use_case_impl.dart';
+import '../use_case/auth/log_in_with_email_and_password_use_case.dart';
+import '../use_case/auth/log_in_with_email_and_password_use_case_impl.dart';
 import '../use_case/auth/send_password_reset_email_use_case.dart';
 import '../use_case/auth/send_password_reset_email_use_case_impl.dart';
-import '../use_case/auth/sign_in_with_email_and_password_use_case.dart';
-import '../use_case/auth/sign_in_with_email_and_password_use_case_impl.dart';
 import '../use_case/auth/sign_out_use_case.dart';
 import '../use_case/auth/sign_out_use_case_impl.dart';
 import '../use_case/auth/sign_up_with_email_and_password_use_case.dart';
@@ -54,16 +54,14 @@ void _registerUseCases() {
     ),
   );
 
-  serviceLocator.registerFactory<SignInWithEmailAndPasswordUseCase>(
-    () => SignInWithEmailAndPasswordUseCaseImpl(
-      serviceLocator(),
+  serviceLocator.registerFactory<LogInWithEmailAndPasswordUseCase>(
+    () => LogInWithEmailAndPasswordUseCaseImpl(
       serviceLocator(),
     ),
   );
 
   serviceLocator.registerFactory<SignUpWithEmailAndPasswordUseCase>(
     () => SignUpWithEmailAndPasswordUseCaseImpl(
-      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),

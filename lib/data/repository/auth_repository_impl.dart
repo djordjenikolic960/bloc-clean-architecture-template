@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../domain/repository/auth_repository.dart';
-import '../../shared/exception/sign_in_with_email_and_password_failure.dart';
+import '../../shared/exception/log_in_with_email_and_password_failure.dart';
 import '../../shared/exception/sign_up_with_email_and_password_failure.dart';
 import '../data_source/remote/app_auth/auth_service.dart';
 
@@ -14,13 +14,13 @@ class AuthRepositoryImpl implements AuthRepository {
   Stream<User?> get authStateChanges => _authService.authStateChanges;
 
   @override
-  Future<User?> signIn(String email, String password) async {
+  Future<User?> logIn(String email, String password) async {
     try {
       return await _authService.signInWithEmailAndPassword(email, password);
     } on FirebaseAuthException catch (e) {
-      throw SignInWithEmailAndPasswordFailure.fromCode(e.code);
+      throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (e) {
-      throw const SignInWithEmailAndPasswordFailure();
+      throw const LogInWithEmailAndPasswordFailure();
     }
   }
 
@@ -46,7 +46,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await _authService.sendPasswordResetEmail(email);
     } catch (e) {
-      print(e);
+      //todo throw custom exception and handle it on ui
     }
   }
 }

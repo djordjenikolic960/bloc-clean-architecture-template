@@ -15,7 +15,7 @@ import 'shared/app_config/bloc/app_config_event.dart';
 import 'shared/app_config/bloc/app_config_state.dart';
 import 'shared/auth/bloc/auth_bloc.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _init();
   runApp(const MyApp());

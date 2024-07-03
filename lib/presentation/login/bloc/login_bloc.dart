@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/use_case/auth/sign_in_with_email_and_password_use_case.dart';
+import '../../../domain/use_case/auth/log_in_with_email_and_password_use_case.dart';
 import '../../../shared/constant.dart';
-import '../../../shared/exception/sign_in_with_email_and_password_failure.dart';
+import '../../../shared/exception/log_in_with_email_and_password_failure.dart';
 import '../../../shared/helpers/validation_helper.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final SignInWithEmailAndPasswordUseCase _signInWithEmailAndPasswordUseCase;
+  final LogInWithEmailAndPasswordUseCase _logInWithEmailAndPasswordUseCase;
 
   LoginBloc(
-    this._signInWithEmailAndPasswordUseCase,
+    this._logInWithEmailAndPasswordUseCase,
   ) : super(LoginState.empty()) {
     on<LoginWithEmailAndPassword>(_emitLoginWithEmailAndPassword);
     on<UpdatePasswordVisibility>(_emitUpdatePasswordVisibility);
@@ -48,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
 
     try {
-      await _signInWithEmailAndPasswordUseCase.signIn(
+      await _logInWithEmailAndPasswordUseCase.logIn(
         event.email,
         event.password,
       );
@@ -58,7 +58,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           isSuccess: true,
         ),
       );
-    } on SignInWithEmailAndPasswordFailure catch (e) {
+    } on LogInWithEmailAndPasswordFailure catch (e) {
       emit(
         state.copyWith(
           isEmailValid: true,

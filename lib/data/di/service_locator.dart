@@ -40,9 +40,7 @@ Future<void> init({Isar? isar}) async {
   _registerExternalServices();
   _registerServices();
   _registerNetworkClient();
-  //_registerLocalStorage();
   _registerConverters();
-  //_registerHelpers();
   _registerRepositories();
 }
 

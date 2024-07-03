@@ -14,6 +14,11 @@ import 'bloc/login_bloc.dart';
 import 'bloc/login_event.dart';
 import 'bloc/login_state.dart';
 
+class LoginScreenConstants {
+  static const emailKey = Key("email_key");
+  static const passwordKey = Key("password_key");
+}
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -40,8 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context, state) {
         return Scaffold(
           body: SafeArea(
-            bottom: true,
-            top: true,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -56,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const Spacer(),
                       TextInputField(
+                        key: LoginScreenConstants.emailKey,
                         controller: _emailController,
                         isError: !state.isEmailValid,
                         errorMessage: context.l10n.invalid_email_message,
@@ -66,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: Dimens.size12,
                       ),
                       TextInputField(
+                        key: LoginScreenConstants.passwordKey,
                         controller: _passwordController,
                         isError: !state.isPasswordValid,
                         errorMessage: context.l10n.invalid_password_message,
